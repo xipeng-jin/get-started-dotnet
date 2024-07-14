@@ -1,6 +1,26 @@
-﻿@{
-    ViewData["Title"] = "Category";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model List<Category>
 
-<p>Use this page to detail your site's category.</p>
+<h1>Category List</h1>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Category Name</th>
+            <th>Display Order</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderBy(x => x.DisplayOrder))
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.DisplayOrder</td>
+                <td>
+                    <a asp-area="" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                    <a asp-area="" asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
